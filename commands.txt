@@ -1,0 +1,49 @@
+# build (creates an image inside docker):
+    docker build -t dtools_aws .
+
+# run: (Creates a container with the image created with the run above)
+    docker run --rm -it -v $(PWD)/data:/data dtools_aws bash
+
+# Login to your AWS user (connect to Docker) (run one at the time)
+    export AWS_ACCESS_KEY_ID=AKIAWVNNH63W2V6KYILP
+    export AWS_SECRET_ACCESS_KEY=5NUQt2tY176lIRmJik7mS4AmM3uyFKwJnzKOWwdC
+
+# List buckets:
+    aws s3 ls --recursive
+
+# Create bucket:
+    aws s3 mb s3://bdt1tiago2
+
+# Copy files to the bucket:
+    aws s3 cp /data/calendario_2023_2024.pdf s3://bdt1tiago2
+
+
+## minio (this is a local S3 bucket) -----------------------------------------------
+docker run \
+    -d --name minio1\
+    -p 9000:9000\
+    -p 9001:9001\
+    quay.io/minio/minio server /data --console-address ":9001"
+
+# stop minio
+docker stop minio
+
+# remove minio
+docker rm minio
+
+#
+docker inspect minio1
+
+# change aws container credentials:
+    # (enter first into the aws container)
+        docker run --rm -it dtools_aws bash
+    # (change credentials)
+        export AWS_ACCESS_KEY_ID=minioadmin
+        export AWS_SECRET_ACCESS_KEY=minioadmin
+
+# Create bucket
+aws --endpoint-url http://172.17.0.2:9000 s3 mb s3://minios3bucket
+
+
+# ----------------------------------------------------------------------------------------------
+
