@@ -1,0 +1,51 @@
+# run mondodb image
+docker run --name mongodb -p 27017:27017 -d mongo:4.4.6
+
+# execute mongo shell
+docker exec -it mongodb mongo
+
+# stop mongo db container
+docker stop mongodb
+
+# start mongo container
+docker start mongodb
+
+# delete and remove the container
+docker rm mongodb
+
+
+##### Jupyter Notebook
+# mac/linux
+docker run --name jupyter -p 8888:8888 -v $(PWD)/notebooks:/home/jovyan jupyter/minimal-notebook
+
+# windows in power shell
+docker run --name jupyter -p 8888:8888 -v ${PWD}/notebooks:/home/jovyan jupyter/minimal-notebook
+
+# stop jupyter container
+docker stop jupyter
+
+# start jupyter container
+docker start jupyter
+
+# delete and remove the container
+docker rm jupyter
+
+
+## to get the IP from a container
+# run
+docker inspect container_name -> docker inspect mongodb
+#get the field IPAddress
+
+
+## ----------
+# mongoDB collections exploration
+    show dbs
+    db
+    use test
+    show collections
+
+# create a collection called "test_collection"
+db.test_collection.insert({name: "test",age:20})
+
+# retrieve the data inside "test_collection"
+db.test_collection.find()

@@ -1,0 +1,11 @@
+[
+    { "name": "Alice", "age": 28, "city": "New York", "hobbies": ["reading", "gaming", "travel"] },
+    { "name": "Bob", "age": 34, "city": "San Francisco", "hobbies": ["painting", "fitness"] },
+    { "name": "Charlie", "age": 23, "city": "New York", "hobbies": ["coding", "music", "gaming"] },
+    { "name": "Diana", "age": 31, "city": "Boston", "hobbies": ["reading", "yoga", "photography", "travel"] },
+    { "name": "Ethan", "age": 27, "city": "San Francisco", "hobbies": ["fitness", "travel", "photography"] },
+    { "name": "Fiona", "age": 21, "city": "Boston", "hobbies": ["reading", "gaming", "music"] },
+    { "name": "John", "age": 40, "city": "Boston", "hobbies": ["reading", "travel"] },
+    { "name": "James", "age": 35 },
+    { "name": "Mary", "age": 28 }
+]
