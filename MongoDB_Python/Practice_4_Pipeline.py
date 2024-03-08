@@ -54,12 +54,12 @@ for result in col.find(query2, projection2):
     
 
 # 3 - Calculate the number of users:
-print("Number of users: ", col.count_documents({}))
+print("\nNumber of users: ", col.count_documents({}))
 
 
 
 # 4 - Calculate the number of users that have more than 30 years, group by city:
-pipeline2 = [
+pipeline1 = [
     {
         "$match": {
             "age": {"$gt": 30}  # Filter documents where age is greater than 30
@@ -73,11 +73,11 @@ pipeline2 = [
     }
 ]
 
-result_2 = list(col.aggregate(pipeline2))
+result_1 = list(col.aggregate(pipeline1))
 
-if result_2:
+if result_1:
     print("\nNumber of users that have more than 30 years: ")
-    for item in result_2:
+    for item in result_1:
         print(f"City: {item['_id']}, Count: {item['count']}")
 else:
     print("\nNo users found.")
@@ -86,7 +86,7 @@ else:
 
 
 # 5 - Calculate the number of users that have as hobby "fitness" grouped by city:
-pipeline3 = [
+pipeline2 = [
     {
         "$match": {
             "hobbies": "fitness"  # Filter documents where hobby is "fitness"
@@ -100,11 +100,11 @@ pipeline3 = [
     }
 ]
 
-result_3 = list(col.aggregate(pipeline3))
+result_2 = list(col.aggregate(pipeline2))
 
-if result_3:
+if result_2:
     print("\nNumber of users that have 'fitness' as a hobby:")
-    for item in result_3:
+    for item in result_2:
         print(f"City: {item['_id']}, Count: {item['count']}")
 else:
     print("\nNo users found with 'fitness' as a hobby.")
@@ -113,7 +113,7 @@ else:
 
 
 # 6 - Calculate the number of users that have less than 20 years old grouped by city:
-pipeline4 = [
+pipeline3 = [
     {
         "$match": {
             "age": {"$lt": 20}  # Filter documents where age is less than 20
@@ -127,11 +127,11 @@ pipeline4 = [
     }
 ]
 
-result_4 = list(col.aggregate(pipeline4))
+result_3 = list(col.aggregate(pipeline3))
 
-if result_4:
+if result_3:
     print("\nNumber of users that are less than 20 years old:")
-    for item in result_4:
+    for item in result_3:
         print(f"City: {item['_id']}, Count: {item['count']}")
 else:
     print("\nNo users found that are less than 20 years old.")
