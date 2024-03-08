@@ -1,0 +1,27 @@
+# Cassandra Docker conteiner
+    - docker run -d --name cassandra -p 9042:9042 cassandra:latest
+# Enter the Cassandra docker env:
+    - docker exec -it cassandra cqlsh
+        system.schema_keyspaces
+        describe keyspaces # show the keyspaces (equivalent to Databases) that the clusters has.
+
+# Check Cassandra service status
+- docker exec -it cassandra nodetool status
+
+
+
+CREATE KEYSPACE IF NOT EXISTS first_keyspace
+    WITH REPLICATION = {
+        'class': 'SimpleStrategy', 'replication_factor': 1};
+
+
+Describe keyspaces;
+
+
+DROP KEYSPACE IF EXISTS first_keyspace;
+
+
+Alter KEYSPACE first_keyspace
+    WITH REPLICATION = {
+        'class': 'SimpleStrategy', 'replication_factor': 1};
+
