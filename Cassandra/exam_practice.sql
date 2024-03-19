@@ -103,7 +103,7 @@ CREATE INDEX ON bookstore.books(genre);
 SELECT * FROM bookstore.books
 WHERE genre = 'Adventure';
 
--- INDEX METODH 2: (NOT the most efficient)
+-- INDEX METODH 2: (most efficient)
 	-- When CREATing the table, reference the column to use as filter in the PK:
 		--  (...) PRIMARY KEY (order_id, genre) (...)
 
