@@ -7,7 +7,7 @@ redis = Redis (host='127.0.0.1', port='6379', decode_responses=True)
 print (f"Redis version: {redis.info() ['redis_version']}")
 
 
-
+##################################### Data Structures/Types == String #####################################
 # create a new key - value 
 redis.set('foo', 'bar')
 # get the value for the key created

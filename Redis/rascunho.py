@@ -6,6 +6,7 @@ from redis import Redis
 redis = Redis (host='localhost', port='6379', decode_responses=True)
 
 
+##################################### Data Structures/Types == Sets #####################################
 res1 = redis.sadd("bikes:racing:france", "bike:1")
 print(res1) # >>> 1
 res2 = redis.sadd("bikes:racing:france", "bike:1")
@@ -15,8 +16,6 @@ print(res3) # >>> 2
 res4 = redis.sadd("bikes:racing:usa", "bike: 1", "bike:4")
 print(res4) # >>> 2
 
-
-## -------------------------------------------------------------------------------------------------------------------------
 # check if bike:1 is a member of bikes: racing: usa
 res5 = redis.sismember("bikes:racing:usa", "bike:1") 
 print(res5) # >>> 1
@@ -29,9 +28,13 @@ print(res7)
 # get the number of elements in set res = redis.scard("bikes: racing: france") print(res) # >>> 3
 res8= redis.scard("bikes:racing:france") 
 print(res8)
+# Move member from the set at source to the set at destination. 
+res9 = redis.smove("bikes:racing:france", "bikes:racing:usa", "bike:3")
+print(res9)
 
 
-## -------------------------------------------------------------------------------------------------------------------------
+
+##################################### Data Structures/Types == Sorted Sets #####################################
 # add value Norem with score 10
 res1 = redis.zadd("racer_scores", {"Norem": 10}) 
 print(res1) # >>> 1
@@ -56,10 +59,17 @@ print(res5) # >>> ['Prickett', 'Castilla', 'Royce', 'Norem', 'Sam-Bodden', 'Ford
 res7 = redis.zrangebyscore ("racer_scores", "-inf", 10) 
 print(res7) # >>> ['Ford', 'Sam-Bodden', 'Norem', 'Royce']]
 
+# Returns the sorted set cardinality (number of elements) of the sorted set stored at key.
+res = redis.zcard("racer_scores")
+print(res)
+
+# Returns the number of elements in the sorted set at key with a score between min and max.
+res = redis.zcount("racer_scores", 0, 10)
+print(res)
 
 
 
-## -------------------------------------------------------------------------------------------------------------------------
+##################################### Data Structures/Types == Hash #####################################
 key = "bike: 1"
 data = {
     "model": "Deimos",
@@ -93,10 +103,14 @@ res5 = redis.hmget("bike: 1", ["model", "price"])
 print(res5)
 # >>> ['Deimos', '4972']
 
+# Returns all field names in the hash stored at key. (https://redis.io/commands/?group=hash)
+res = redis.hkeys("bike: 1")
+print(res)
 
 
 
-## -------------------------------------------------------------------------------------------------------------------------
+
+##################################### Data Structures/Types == Lists #####################################
 key = 'bikes'
 redis.rpush(key, 'bike:1')
 
@@ -126,7 +140,9 @@ print(f"Key: {key} | Length: {redis.llen (key)}")
 
 
 
-## -------------------------------------------------------------------------------------------------------------------------
+
+
+##################################### Time-to-Live (TTL) #####################################
 # create a new key value
 
 redis.set('expire_key', 'redis_data')
